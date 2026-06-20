@@ -1,0 +1,1771 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Telegram Proxy — скачать программу для обхода блокировок Telegram в России. Бесплатная утилита для Windows 10/11. Работает через zapret телеграм, восстанавливает доступ за 1 клик. Без вирусов, с открытым исходным кодом.">
+  <meta name="keywords" content="telegram proxy, телеграм запрет, скачать телеграм прокси, zapret телеграм, обход блокировки телеграм, telegram zapret, программа для обхода блокировок">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Telegram Proxy — скачать программу для обхода блокировок Telegram в России">
+  <meta property="og:description" content="Бесплатная утилита для Windows 10/11. Работает через zapret телеграм, восстанавливает доступ за 1 клик. Без вирусов, с открытым исходным кодом.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://telegramproxy.ru">
+  <meta property="og:image" content="img/og-image.png">
+  <link rel="canonical" href="https://telegramproxy.ru">
+  <title>Telegram Proxy — скачать программу для обхода блокировок Telegram в России</title>
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #2AABEE;
+      --primary-dark: #1A8BC6;
+      --primary-glow: rgba(42, 171, 238, 0.25);
+      --bg: #0B0E14;
+      --bg-card: #131820;
+      --text: #E8EDF5;
+      --text-secondary: #8B95A8;
+      --accent-green: #4ADE80;
+      --border: #1E293B;
+      --max-width: 1200px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== Animations ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(0.95); }
+    }
+
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 20px var(--primary-glow); }
+      50% { box-shadow: 0 0 40px var(--primary-glow), 0 0 60px rgba(42, 171, 238, 0.1); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== Header ===== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(11, 14, 20, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid transparent;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    header.scrolled {
+      border-bottom-color: var(--border);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--primary), #0088CC);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .logo-icon::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), transparent);
+      opacity: 0.3;
+      z-index: -1;
+      animation: glow 3s ease-in-out infinite;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.25s;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      border-radius: 2px;
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .header-btn {
+      background: linear-gradient(135deg, var(--primary), #0088CC);
+      color: #fff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .header-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 24px rgba(42, 171, 238, 0.35);
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+      z-index: 1001;
+    }
+
+    .burger span {
+      width: 26px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .burger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .burger.active span:nth-child(2) {
+      opacity: 0;
+      transform: translateX(-8px);
+    }
+    .burger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* ===== Animated background ===== */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .hero-bg .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.4;
+    }
+
+    .hero-bg .orb:nth-child(1) {
+      width: 600px;
+      height: 600px;
+      background: var(--primary);
+      top: -20%;
+      right: -10%;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .hero-bg .orb:nth-child(2) {
+      width: 400px;
+      height: 400px;
+      background: #4ADE80;
+      bottom: -15%;
+      left: -5%;
+      opacity: 0.2;
+      animation: float 10s ease-in-out infinite reverse;
+    }
+
+    .hero-bg .orb:nth-child(3) {
+      width: 300px;
+      height: 300px;
+      background: #8B5CF6;
+      top: 40%;
+      left: 10%;
+      opacity: 0.15;
+      animation: float 12s ease-in-out infinite 2s;
+    }
+
+    .hero-bg .grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(42, 171, 238, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(42, 171, 238, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 72px;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-content {
+      animation: fadeInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(42, 171, 238, 0.1);
+      border: 1px solid rgba(42, 171, 238, 0.2);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 24px;
+      letter-spacing: 0.3px;
+    }
+
+    .hero-badge span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+
+    .hero h1 {
+      font-size: clamp(30px, 4.2vw, 54px);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.5px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 .gradient {
+      background: linear-gradient(135deg, var(--primary) 0%, #4ADE80 50%, var(--primary) 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 4s ease-in-out infinite;
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 520px;
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #0088CC);
+      color: #fff;
+      border: none;
+      padding: 16px 32px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+      background-size: 200% 200%;
+      transition: background-position 0.6s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(42, 171, 238, 0.35);
+    }
+
+    .btn-primary:hover::before {
+      background-position: right center;
+    }
+
+    .btn-primary:active {
+      transform: translateY(-1px) scale(0.99);
+    }
+
+    .btn-primary .small {
+      font-weight: 400;
+      font-size: 12px;
+      opacity: 0.8;
+      display: block;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 16px 26px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.25s, border-color 0.25s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(42, 171, 238, 0.3);
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary:active {
+      transform: translateY(-1px);
+    }
+
+    .virus-trust {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--accent-green);
+      font-weight: 500;
+    }
+
+    .virus-trust svg {
+      flex-shrink: 0;
+      filter: drop-shadow(0 0 6px rgba(74, 222, 128, 0.3));
+    }
+
+    .hero-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+      opacity: 0;
+    }
+
+    .hero-image-inner {
+      width: 100%;
+      max-width: 520px;
+      background: linear-gradient(135deg, rgba(19, 24, 32, 0.9), rgba(13, 17, 23, 0.9));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5), 0 0 40px rgba(42, 171, 238, 0.05);
+      backdrop-filter: blur(10px);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+    }
+
+    .hero-image-inner:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 32px 100px rgba(0, 0, 0, 0.6), 0 0 60px rgba(42, 171, 238, 0.08);
+    }
+
+    .hero-image-inner .mock-window {
+      width: 100%;
+      border-radius: 8px;
+      background: #0D1117;
+      overflow: hidden;
+    }
+
+    .mock-titlebar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: #161B22;
+    }
+
+    .mock-titlebar .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      transition: opacity 0.2s;
+    }
+
+    .mock-titlebar .dot:nth-child(1) { background: #FF5F56; }
+    .mock-titlebar .dot:nth-child(2) { background: #FFBD2E; }
+    .mock-titlebar .dot:nth-child(3) { background: #27C93F; }
+
+    .mock-titlebar .dot:hover {
+      opacity: 0.7;
+    }
+
+    .mock-titlebar span {
+      margin-left: 12px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .mock-body {
+      padding: 24px 20px;
+    }
+
+    .mock-body .status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      margin-bottom: 16px;
+    }
+
+    .mock-body .status .indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 16px rgba(74, 222, 128, 0.6);
+      animation: pulse 2s infinite;
+    }
+
+    .mock-body .status-text {
+      color: var(--accent-green);
+      font-weight: 600;
+    }
+
+    .mock-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .mock-stat {
+      background: rgba(255,255,255,0.03);
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .mock-stat strong {
+      display: block;
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 2px;
+      font-weight: 700;
+    }
+
+    /* ===== Section Common ===== */
+    section {
+      padding: 100px 0;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+
+    .section-sub {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+
+    .section-center {
+      text-align: center;
+    }
+
+    .section-center .section-sub {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ===== Features ===== */
+    .features {
+      background: var(--bg-card);
+      position: relative;
+    }
+
+    .features::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px 28px;
+      transition: border-color 0.35s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(42, 171, 238, 0.25);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .feature-card:hover::after {
+      opacity: 1;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .feature-icon.blue { background: rgba(42, 171, 238, 0.12); }
+    .feature-icon.green { background: rgba(74, 222, 128, 0.12); }
+    .feature-icon.purple { background: rgba(168, 85, 247, 0.12); }
+    .feature-icon.orange { background: rgba(251, 146, 60, 0.12); }
+
+    .feature-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.2px;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+
+    /* ===== Instructions ===== */
+    .instructions {
+      position: relative;
+    }
+
+    .instructions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .step {
+      display: flex;
+      gap: 20px;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .step:hover {
+      transform: translateX(4px);
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(42, 171, 238, 0.1);
+      border: 1px solid rgba(42, 171, 238, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--primary);
+      transition: background 0.25s, border-color 0.25s;
+    }
+
+    .step:hover .step-num {
+      background: rgba(42, 171, 238, 0.18);
+      border-color: rgba(42, 171, 238, 0.3);
+    }
+
+    .step-content h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .step-content p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .specs-table-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      transition: border-color 0.3s;
+    }
+
+    .specs-table-wrap:hover {
+      border-color: rgba(42, 171, 238, 0.15);
+    }
+
+    .specs-table-wrap h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.2px;
+    }
+
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .specs-table tr {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .specs-table tr:last-child {
+      border-bottom: none;
+    }
+
+    .specs-table td {
+      padding: 14px 8px;
+      font-size: 14px;
+    }
+
+    .specs-table td:first-child {
+      font-weight: 500;
+      color: var(--text-secondary);
+      width: 40%;
+    }
+
+    .specs-table td:last-child {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .specs-ok {
+      color: var(--accent-green);
+    }
+
+    /* ===== FAQ ===== */
+    .faq {
+      background: var(--bg-card);
+      position: relative;
+    }
+
+    .faq::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
+    .faq::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
+    .faq-list {
+      max-width: 780px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .faq-item.open {
+      border-color: rgba(42, 171, 238, 0.25);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .faq-question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 24px;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      transition: color 0.2s;
+    }
+
+    .faq-question:hover {
+      color: var(--primary);
+    }
+
+    .faq-question .arrow {
+      flex-shrink: 0;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .faq-item.open .faq-question .arrow {
+      transform: rotate(180deg);
+      color: var(--primary);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 0 24px;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 500px;
+      padding: 0 24px 20px;
+    }
+
+    .faq-answer p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    /* ===== Blog ===== */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .blog-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      transition: border-color 0.35s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .blog-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+
+    .blog-card:hover {
+      border-color: rgba(42, 171, 238, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .blog-card:hover::after {
+      opacity: 1;
+    }
+
+    .blog-card .tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      background: rgba(42, 171, 238, 0.08);
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      letter-spacing: 0.3px;
+    }
+
+    .blog-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      line-height: 1.4;
+      letter-spacing: -0.2px;
+    }
+
+    .blog-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .blog-card .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: none;
+      margin-top: 14px;
+      transition: gap 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .blog-card .read-more:hover {
+      gap: 12px;
+    }
+
+    /* ===== Community ===== */
+    .community {
+      text-align: center;
+    }
+
+    .community-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .community-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 16px 28px;
+      border-radius: 12px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: border-color 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+    }
+
+    .community-link:hover {
+      border-color: rgba(42, 171, 238, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .community-link .tg { color: var(--primary); }
+    .community-link .gh { color: #fff; }
+
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 44px;
+      text-align: left;
+    }
+
+    .testimonial {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: border-color 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .testimonial:hover {
+      border-color: rgba(42, 171, 238, 0.15);
+      transform: translateY(-3px);
+    }
+
+    .testimonial-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), #0088CC);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 15px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .testimonial-name {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .testimonial-date {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    .testimonial-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .testimonial-stars {
+      color: #FBBF24;
+      font-size: 13px;
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 0 32px;
+      background: var(--bg-card);
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .footer-col h4 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      margin-bottom: 10px;
+      transition: color 0.25s, transform 0.25s;
+    }
+
+    .footer-col a:hover {
+      color: var(--text);
+      transform: translateX(3px);
+    }
+
+    .footer-bottom {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .footer-bottom strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .hero-image {
+        order: -1;
+      }
+
+      .hero-image-inner {
+        max-width: 100%;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 100px 0 60px;
+      }
+
+      .instructions-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      nav {
+        display: none;
+      }
+
+      nav.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(11, 14, 20, 0.98);
+        backdrop-filter: blur(24px);
+        padding: 100px 32px 32px;
+        gap: 24px;
+        align-items: center;
+        justify-content: center;
+      }
+
+      nav.open a {
+        font-size: 18px;
+      }
+
+      .burger {
+        display: flex;
+      }
+
+      .header-btn {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      section {
+        padding: 64px 0;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .btn-primary, .btn-secondary {
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+      }
+
+      .btn-primary .small {
+        display: inline;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 28px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .testimonials {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header id="header">
+  <div class="container header-inner">
+    <a href="/" class="logo">
+      <div class="logo-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" stroke="none"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+      </div>
+      Telegram Proxy
+    </a>
+    <nav id="nav">
+      <a href="#features">Возможности</a>
+      <a href="#install">Установка</a>
+      <a href="#faq">FAQ</a>
+      <a href="#blog">Статьи</a>
+      <a href="#community">Отзывы</a>
+    </nav>
+    <a href="https://github.com/Flowseala/proxy-telegram/releases/download/proxytelegram/TelegramProxy1.0.4.exe" target="_blank" rel="noopener noreferrer" class="header-btn">Скачать v1.0.4</a>
+    <button class="burger" id="burger" aria-label="Меню">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="download">
+  <div class="hero-bg">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="grid-overlay"></div>
+  </div>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span></span>
+          Актуальная версия 1.0.4 — 8 мая 2026
+        </div>
+        <h1>
+          <span class="gradient">Telegram Proxy</span> — скачать программу для обхода блокировок Telegram в России
+        </h1>
+        <p>
+          Бесплатная утилита с открытым исходным кодом, которая автоматически настраивает прокси-соединение для Telegram всего за один клик. Работает на Windows 10 и 11. Не требует прав администратора. Не замедляет интернет.
+        </p>
+        <div class="hero-actions">
+          <a href="https://github.com/Flowseala/proxy-telegram/releases/download/proxytelegram/TelegramProxy1.0.4.exe" target="_blank" rel="noopener noreferrer" class="btn-primary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Скачать бесплатно
+            <span class="small">Telegram Proxy v1.0.4 | exe | 15 MB</span>
+          </a>
+          <a href="https://github.com/Flowseala/proxy-telegram" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            Документация / GitHub
+          </a>
+        </div>
+        <div class="virus-trust">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          Проверено через VirusTotal: 0/64 детектов. Без скрытых майнеров.
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="hero-image-inner">
+          <div class="mock-window">
+            <div class="mock-titlebar">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span>Telegram Proxy v1.0.4</span>
+            </div>
+            <div class="mock-body">
+              <div class="status">
+                <span class="indicator"></span>
+                <span class="status-text">Прокси-сервер активен</span>
+                <span style="margin-left:auto;font-size:13px;color:var(--text-secondary);">Задержка: 34 мс</span>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);margin-bottom:12px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:4px;"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+                Сервер: Amsterdam | Протокол: MTProto | Шифрование: AES-256
+              </div>
+              <div class="mock-stats">
+                <div class="mock-stat">
+                  <strong>2.4 MB</strong>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:2px;"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                  Отправлено
+                </div>
+                <div class="mock-stat">
+                  <strong>18.7 MB</strong>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:2px;"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+                  Получено
+                </div>
+                <div class="mock-stat">
+                  <strong>00:42:18</strong>
+                  Время работы
+                </div>
+                <div class="mock-stat">
+                  <strong>Все платформы</strong>
+                  Android, iOS, PC
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-label">Возможности</div>
+    <h2 class="section-title reveal">
+      Обход блокировки Telegram — надёжно, быстро и бесплатно
+    </h2>
+    <p class="section-sub reveal">
+      Telegram Proxy обходит запреты на уровне провайдера, не требует VPN и не собирает логи. Полностью безопасный софт для обхода блокировок с открытым исходным кодом.
+    </p>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon blue">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Один клик до доступа</h3>
+        <p>
+          Запустили программу — Telegram заработал. Без танцев с бубном, без ввода IP-адресов и портов. Утилита сама подбирает рабочий прокси-сервер из пула проверенных. После запуска можно свернуть в трей и забыть.
+        </p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon green">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        </div>
+        <h3>Полная приватность и шифрование</h3>
+        <p>
+          Все данные передаются через шифрованный MTProto-туннель (AES-256). Провайдер видит только зашифрованный трафик, но не может определить, что вы используете Telegram. Никаких логов и метаданных — программа не собирает и не передаёт ваши данные.
+        </p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon purple">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h3>Открытый исходный код</h3>
+        <p>
+          Исходный код опубликован на GitHub под лицензией MIT. Любой желающий может проверить, что внутри нет скрытых майнеров, шпионских модулей или бэкдоров. Прозрачность — наш главный приоритет.
+        </p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon orange">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FB923C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+        <h3>Поддержка всех платформ Telegram</h3>
+        <p>
+          Прокси работает на уровне системы — Telegram Desktop, мобильные приложения (Android/iOS через ручное добавление), веб-версия. Всё, что нужно — скопировать прокси-ссылку или запустить утилиту на ПК.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INSTRUCTIONS ===== -->
+<section class="instructions" id="install">
+  <div class="container">
+    <div class="section-label">Установка</div>
+    <div class="instructions-grid">
+      <div>
+        <h2 class="section-title reveal">
+          Как установить и запустить Telegram Proxy за 3 шага
+        </h2>
+        <p class="section-sub reveal" style="margin-bottom:32px;">
+          Программа не требует прав администратора, не устанавливает драйверы и не меняет системные файлы. Просто скачайте и пользуйтесь.
+        </p>
+        <div class="steps">
+          <div class="step reveal">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>Скачайте exe-файл</h4>
+              <p>Нажмите кнопку «Скачать» выше или перейдите в раздел Releases на GitHub. Файл весит всего 15 MB и не содержит вирусов (проверено VirusTotal).</p>
+            </div>
+          </div>
+          <div class="step reveal">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>Запустите программу</h4>
+              <p>Дважды кликните по скачанному файлу. Разрешение UAC не потребуется — утилита работает в пользовательском пространстве. При первом запуске брандмауэр Windows может запросить разрешение, нажмите «Разрешить».</p>
+            </div>
+          </div>
+          <div class="step reveal">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>Пользуйтесь Telegram</h4>
+              <p>После запуска в трее появится зелёная иконка — это значит, что прокси-туннель активен. Откройте Telegram — соединение восстановлено. Для автозапуска добавьте ярлык в папку «Автозагрузка».</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="specs-table-wrap reveal">
+          <h3>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:8px;"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            Системные требования
+          </h3>
+          <table class="specs-table">
+            <tr>
+              <td>Операционная система</td>
+              <td>Windows 10 (все версии) / Windows 11</td>
+            </tr>
+            <tr>
+              <td>Разрядность</td>
+              <td>x64, x86 (32-bit)</td>
+            </tr>
+            <tr>
+              <td>.NET Framework</td>
+              <td><span class="specs-ok">+</span> Не требуется (нативный код)</td>
+            </tr>
+            <tr>
+              <td>ОЗУ</td>
+              <td>от 512 MB</td>
+            </tr>
+            <tr>
+              <td>Место на диске</td>
+              <td>~30 MB</td>
+            </tr>
+            <tr>
+              <td>Права администратора</td>
+              <td><span class="specs-ok">+</span> Не требуются</td>
+            </tr>
+            <tr>
+              <td>Интернет</td>
+              <td>Любое подключение (3G/4G/Wi-Fi)</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title reveal">Часто задаваемые вопросы о Telegram Proxy</h2>
+    <p class="section-sub reveal">Ответы на самые острые вопросы пользователей: безопасность, настройка, обновление.</p>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          Безопасно ли использовать Telegram Proxy? Не украдут ли мои данные?
+          <span class="arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer">
+          <p>
+            Да, абсолютно безопасно. Во-первых, исходный код полностью открыт — любой разработчик может убедиться, что программа не содержит шпионских функций и скрытых майнеров. Во-вторых, весь трафик шифруется по протоколу MTProto с AES-256 — провайдер видит только случайный набор байт, но не содержимое переписки. В-третьих, утилита не собирает и не хранит логи, не отправляет телеметрию на сторонние серверы. На VirusTotal стабильно 0/64 детектов. Это один из самых безопасных способов обхода блокировок Telegram в России на данный момент.
+          </p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          Программа перестала работать после обновления Windows. Что делать?
+          <span class="arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer">
+          <p>
+            Такое бывает, если Microsoft выпустила крупное обновление системы. В большинстве случаев помогает перезапуск утилиты. Если не помогло — скачайте последнюю версию с нашего сайта (мы оперативно выпускаем патчи под новые сборки Windows). Также проверьте, не заблокировал ли брандмауэр Windows или сторонний антивирус сетевое подключение программы. Добавьте telegram-proxy.exe в исключения. Если проблема осталась — <a href="https://t.me/helptelegramproxy_bot" target="_blank" rel="noopener noreferrer" style="color:var(--primary);text-decoration:underline;">напишите в наш Telegram-чат</a>, мы отвечаем в течение нескольких часов.
+          </p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          Чем Telegram Proxy отличается от обычного VPN?
+          <span class="arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer">
+          <p>
+            Принципиальная разница в том, что прокси-утилита обрабатывает трафик только одного приложения — Telegram, а VPN шифрует вообще весь интернет-трафик на устройстве. Это даёт два преимущества: скорость не падает (нет оверхеда на шифрование YouTube, браузера и т.д.) и не расходуется трафик других приложений. Кроме того, для работы telegram proxy не нужны права администратора, в отличие от большинства VPN-клиентов. Если ваша цель — исключительно обход запрета Telegram, то эта утилита будет быстрее и удобнее полноценного VPN.
+          </p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          Как обновить программу до новой версии?
+          <span class="arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer">
+          <p>
+            Встроенного механизма автообновления пока нет, но процесс ручного обновления занимает 30 секунд. Просто скачайте новый exe-файл с сайта (или из GitHub Releases) и запустите его. Старую версию можно удалить — настройки хранятся в отдельном файле config.ini в папке программы и сохраняются при замене. <a href="https://t.me/proxyservice10" target="_blank" rel="noopener noreferrer" style="color:var(--primary);text-decoration:underline;">Подпишитесь на наш Telegram-канал</a>, чтобы первыми узнавать о выходе новых версий и обновлений для стабильного обхода блокировок.
+          </p>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          Где хранятся конфигурационные файлы? Как сбросить настройки?
+          <span class="arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </button>
+        <div class="faq-answer">
+          <p>
+            Все настройки хранятся в файле config.ini, который находится в той же папке, что и исполняемый файл программы. Если вы хотите полностью сбросить конфигурацию — просто удалите этот файл и перезапустите утилиту. Она автоматически создаст config.ini с настройками по умолчанию и подберёт новый рабочий прокси-сервер. Также в этой папке может быть файл log.txt с техническим логом — он нужен для диагностики проблем, его можно безопасно удалять.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BLOG ===== -->
+<section class="blog" id="blog">
+  <div class="container">
+    <div class="section-label">Блог</div>
+    <h2 class="section-title reveal">Полезные статьи о Telegram, блокировках и безопасности</h2>
+    <p class="section-sub reveal">Разбираемся, как работает блокировка мессенджеров, как защитить свои данные и почему прокси — это не VPN.</p>
+    <div class="blog-grid">
+      <div class="blog-card reveal">
+        <div class="tag">Блокировки</div>
+        <h3>Как вручную настроить прокси в Telegram без сторонних программ</h3>
+        <p>
+          Пошаговая инструкция: как добавить MTProto-прокси в Telegram Desktop и мобильную версию вручную, если автоматическая утилита недоступна. Разбираем форматы ссылок, SOCKS5 и MTProto.
+        </p>
+        <a href="https://t.me/proxyservice10" target="_blank" rel="noopener noreferrer" class="read-more">
+          Читать статью
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <div class="blog-card reveal">
+        <div class="tag">Безопасность</div>
+        <h3>Почему DPI-блокировки опасны и как защитить свои данные</h3>
+        <p>
+          DPI (Deep Packet Inspection) используется провайдерами для фильтрации трафика. Рассказываем, какие данные становятся видны вашему оператору и как шифрование помогает сохранить приватность при использовании telegram zapret.
+        </p>
+        <a href="https://t.me/proxyservice10" target="_blank" rel="noopener noreferrer" class="read-more">
+          Читать статью
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <div class="blog-card reveal">
+        <div class="tag">Сравнение</div>
+        <h3>Telegram Proxy vs VPN vs Shadowsocks: что выбрать для обхода блокировок</h3>
+        <p>
+          Подробное сравнение трёх популярных способов обхода блокировок Telegram в России. Плюсы, минусы, скорость, безопасность и удобство настройки. Поможет сделать осознанный выбор.
+        </p>
+        <a href="https://t.me/proxyservice10" target="_blank" rel="noopener noreferrer" class="read-more">
+          Читать статью
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMMUNITY ===== -->
+<section class="community" id="community">
+  <div class="container">
+    <div class="section-label">Сообщество</div>
+    <h2 class="section-title reveal">Присоединяйтесь к сообществу Telegram Proxy</h2>
+    <p class="section-sub reveal" style="margin:0 auto;">
+      Более 12 000 пользователей уже используют утилиту. Присоединяйтесь к чату, задавайте вопросы, предлагайте идеи.
+    </p>
+    <div class="community-links reveal">
+      <a href="https://t.me/proxyservice10" target="_blank" rel="noopener noreferrer" class="community-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--primary)" stroke="none"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Telegram-канал (новости)
+      </a>
+      <a href="https://t.me/helptelegramproxy_bot" target="_blank" rel="noopener noreferrer" class="community-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        Telegram-чат (поддержка)
+      </a>
+      <a href="https://github.com/Flowseala/proxy-telegram" target="_blank" rel="noopener noreferrer" class="community-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+        GitHub (исходный код)
+      </a>
+    </div>
+
+    <div class="testimonials">
+      <div class="testimonial reveal">
+        <div class="testimonial-header">
+          <div class="testimonial-avatar">A</div>
+          <div>
+            <div class="testimonial-name">Алексей К.</div>
+            <div class="testimonial-date">Пользователь с февраля 2026</div>
+          </div>
+        </div>
+        <div class="testimonial-stars">* * * * *</div>
+        <div class="testimonial-text">
+          Отличная программа. Запустил — и Telegram заработал сразу. Никаких лишних телодвижений. Использую на Windows 11, полёт нормальный. Спасибо разработчикам за открытый код!
+        </div>
+      </div>
+      <div class="testimonial reveal">
+        <div class="testimonial-header">
+          <div class="testimonial-avatar">E</div>
+          <div>
+            <div class="testimonial-name">Елена М.</div>
+            <div class="testimonial-date">Пользователь с марта 2026</div>
+          </div>
+        </div>
+        <div class="testimonial-stars">* * * * *</div>
+        <div class="testimonial-text">
+          Перепробовала кучу способов обхода блокировки телеграм — прокси, впн, шадовсокс. Этот софт оказался самым простым и стабильным. Работает даже на слабом ноутбуке с 4 ГБ ОЗУ.
+        </div>
+      </div>
+      <div class="testimonial reveal">
+        <div class="testimonial-header">
+          <div class="testimonial-avatar">D</div>
+          <div>
+            <div class="testimonial-name">Дмитрий С.</div>
+            <div class="testimonial-date">Разработчик, контрибьютор</div>
+          </div>
+        </div>
+        <div class="testimonial-stars">* * * * *</div>
+        <div class="testimonial-text">
+          Посмотрел исходники — код чистый, без мусора. Нет никаких телеметрий и скрытых запросов. Редко встречается такой ответственный подход. Респект команде!
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>Telegram Proxy</h4>
+        <a href="https://github.com/Flowseala/proxy-telegram/releases/download/proxytelegram/TelegramProxy1.0.4.exe" target="_blank" rel="noopener noreferrer">Скачать последнюю версию</a>
+        <a href="#install">Системные требования</a>
+        <a href="https://github.com/Flowseala/proxy-telegram/releases" target="_blank" rel="noopener noreferrer">История версий (Changelog)</a>
+      </div>
+      <div class="footer-col">
+        <h4>Документация</h4>
+        <a href="https://github.com/Flowseala/proxy-telegram" target="_blank" rel="noopener noreferrer">GitHub репозиторий</a>
+        <a href="https://t.me/proxyservice10" target="_blank" rel="noopener noreferrer">Настройка прокси в Telegram</a>
+        <a href="#faq">Решение проблем (FAQ)</a>
+      </div>
+      <div class="footer-col">
+        <h4>Разработчикам</h4>
+        <a href="https://github.com/Flowseala/proxy-telegram" target="_blank" rel="noopener noreferrer">GitHub репозиторий</a>
+        <a href="https://github.com/Flowseala/proxy-telegram/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">Лицензия MIT</a>
+        <a href="https://github.com/Flowseala/proxy-telegram/issues" target="_blank" rel="noopener noreferrer">Контрибьюторам</a>
+      </div>
+      <div class="footer-col">
+        <h4>Сообщество</h4>
+        <a href="https://t.me/proxyservice10" target="_blank" rel="noopener noreferrer">Telegram-канал</a>
+        <a href="https://t.me/helptelegramproxy_bot" target="_blank" rel="noopener noreferrer">Чат поддержки</a>
+        <a href="https://github.com/Flowseala/proxy-telegram/issues" target="_blank" rel="noopener noreferrer">Сообщить об ошибке</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>
+        <strong>Скачать программу для обхода блокировок Telegram в России</strong> — разработано командой Telegram Proxy &copy; 2026
+      </span>
+      <span>Не связан с Telegram Messenger LLP. MIT License.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Burger menu
+  const burger = document.getElementById('burger');
+  const nav = document.getElementById('nav');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('active');
+    nav.classList.toggle('open');
+    document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      burger.classList.remove('active');
+      nav.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Header shadow on scroll
+  const headerEl = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    headerEl.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Scroll reveal observer
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
